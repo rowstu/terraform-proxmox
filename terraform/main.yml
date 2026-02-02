@@ -1,0 +1,5 @@
+      - name: Use secret
+        run: |
+          echo "Token length: ${#PROXMOX_API_TOKEN}"
+        env:
+          PROXMOX_API_TOKEN: ${{ secrets.PROXMOX_API_TOKEN }}
