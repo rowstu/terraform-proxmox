@@ -1,4 +1,4 @@
-name: Runner sanity check
+name: Runner check access to proxmox
 
 on:
   push:
@@ -10,9 +10,8 @@ jobs:
     steps:
       - name: Test access to PVE3 API
         run: |
-          curl -k \
-          -H "Authorization: PVEAPIToken=${PROXMOX_TOKEN_ID}=${PROXMOX_TOKEN_SECRET}" \
-            https://pve3:8006/api2/json/nodes | jq -r
+          curl -k -s -X GET "https://pve3:8006/api2/json/cluster/resources?type=vm" \
+     -H 'Authorization: PVEAPIToken=root@pam!${PROXMOX_TOKEN_ID}=${PROXMOX_TOKEN_SECRET}' | jq -r
         env:
           PROXMOX_TOKEN_ID: ${{ secrets.PROXMOX_TOKEN_ID }}
           PROXMOX_TOKEN_SECRET: ${{secrets.PROXMOX_TOKEN_SECRET}}
