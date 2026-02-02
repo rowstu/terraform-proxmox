@@ -1,7 +1,7 @@
 name: Runner check access to proxmox
 
 on:
-  push:
+  #push:
   workflow_dispatch:
 
 jobs:
