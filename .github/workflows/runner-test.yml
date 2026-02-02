@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: Test access to PVE3 API
         run: |
-          curl -k -s -X GET "https://pve3:8006/api2/json/nodes/pve3/qemu/8001/config" -H 'Authorization: PVEAPIToken=root@pam!${PROXMOX_TOKEN_ID}=${PROXMOX_TOKEN_SECRET}' | jq -r
+          curl -k -s -X GET "https://pve3:8006/api2/json/nodes/pve3/qemu/8001/config" -H "Authorization: PVEAPIToken=root@pam!${PROXMOX_TOKEN_ID}=${PROXMOX_TOKEN_SECRET}" | jq -r
+        env:
           PROXMOX_TOKEN_ID: ${{ secrets.PROXMOX_TOKEN_ID }}
-          PROXMOX_TOKEN_SECRET: ${{secrets.PROXMOX_TOKEN_SECRET}}
+          PROXMOX_TOKEN_SECRET: ${{ secrets.PROXMOX_TOKEN_SECRET }}
 
