@@ -8,13 +8,9 @@ jobs:
   test:
     runs-on: self-hosted
     steps:
-      - name: Who am I?
+      - name: Use secret
         run: |
-          echo "Hostname:"
-          hostname
-          echo
-          echo "User:"
-          whoami
-          echo
-          echo "Working directory:"
-          pwd
+          echo "Token length: ${#PROXMOX_API_TOKEN}"
+        env:
+          PROXMOX_API_TOKEN: ${{ secrets.PROXMOX_API_TOKEN }}
+
