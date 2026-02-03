@@ -10,7 +10,7 @@ terraform {
 
 provider "proxmox" {
     pm_tls_insecure = true
-    pm_api_url = "https://pve2.rownet.local:8006/api2/json"
-    pm_api_token_secret = "d6d4c86a-42e7-40b7-b0aa-3e6e64fa478c"
-    pm_api_token_id = "root@pam!terraform"
+    pm_api_url        = var.pm_api_url
+    pm_api_token_id   = var.pm_token_id
+    pm_api_token_secret = var.pm_token_secret
 }
