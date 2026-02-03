@@ -2,14 +2,14 @@
 resource "proxmox_lxc" "debian" {
   count = 3
 
-  hostname = "dev-lxc-${count.index + 1}"
-  ostemplate = var.template
+  hostname    = "dev-lxc-${count.index + 1}"
+  ostemplate  = var.template
   target_node = var.pm_node
-  password = "password123"  # quick-and-dirty
+  password    = "password123" # quick-and-dirty
 
-  cores = 2
+  cores  = 2
   memory = 1024
-  swap = 512
+  swap   = 512
 
   rootfs {
     storage = var.storage
@@ -17,10 +17,10 @@ resource "proxmox_lxc" "debian" {
   }
 
   network {
-    name = "eth0"
+    name   = "eth0"
     bridge = "vmbr0"
-    ip = "dhcp"
-    type = "veth"
+    ip     = "dhcp"
+    type   = "veth"
   }
 
   # optional: start containers automatically
