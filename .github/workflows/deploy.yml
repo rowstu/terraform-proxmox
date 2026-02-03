@@ -1,6 +1,17 @@
-name: Terraform Proxmox deploy
+name: Terraform Proxmox demo
+
 on:
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'Terraform action to perform'
+        required: true
+        default: 'plan'
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
 
 
 jobs:
@@ -34,5 +45,10 @@ jobs:
         run: terraform plan
 
       - name: Terraform apply
+        if: inputs.action == 'apply'
         run: terraform apply -auto-approve
+
+      - name: Terraform destroy
+        if: inputs.action == 'destroy'
+        run: terraform destroy -auto-approve
 
