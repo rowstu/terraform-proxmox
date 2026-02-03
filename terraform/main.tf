@@ -3,7 +3,9 @@ resource "proxmox_vm_qemu" "github_runner" {
   target_node = var.pm_node
   clone       = var.template_vm
 
-  cores  = 2
+  cpu {
+    cores = 2
+  }
   memory = 2048
 
   disks {

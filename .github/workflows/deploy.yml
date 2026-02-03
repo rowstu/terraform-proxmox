@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     env:
           TF_VAR_pm_api_url: ${{ secrets.PROXMOX_API_URL }}
-          TF_VAR_pm_api_token_id: ${{ secrets.PROXMOX_TOKEN_ID }}
+          TF_VAR_pm_api_token_id: ${{ secrets.PROXMOX_TERRAFORM_API_TOKEN_ID }}
           TF_VAR_pm_api_token_secret: ${{ secrets.PROXMOX_TOKEN_SECRET }}
           TF_VAR_pm_node: pve3
           TF_VAR_template_vm: ubuntu24-template
