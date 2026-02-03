@@ -7,7 +7,8 @@ variable "storage" {
 }
 
 variable "template_vm" {
-  default = "local:ubuntu24-template"
+  description = "Name of the Proxmox VM template to clone"
+  default = "local:vztmpl/debian-13-standard_13.1-2_amd64.tar.zst"
 }
 
 variable "pm_api_url" {}

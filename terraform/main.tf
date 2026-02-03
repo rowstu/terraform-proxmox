@@ -1,28 +1,24 @@
-# LXC Containers
-resource "proxmox_lxc" "debian" {
-  count = 3
-
-  hostname    = "dev-lxc-${count.index + 1}"
-  ostemplate  = var.template
+resource "proxmox_vm_qemu" "github_runner" {
+  name        = "github-runner"
   target_node = var.pm_node
-  password    = "password123" # quick-and-dirty
+  clone       = var.template_vm
 
   cores  = 2
-  memory = 1024
-  swap   = 512
+  memory = 2048
 
-  rootfs {
-    storage = var.storage
-    size    = "8G"
+  disks {
+    scsi {
+      scsi0 {
+        disk {
+          size    = 20
+          storage = var.storage
+        }
+      }
+    }
   }
 
   network {
-    name   = "eth0"
     bridge = "vmbr0"
-    ip     = "dhcp"
-    type   = "veth"
+    model  = "virtio"
   }
-
-  # optional: start containers automatically
-  onboot = true
 }
