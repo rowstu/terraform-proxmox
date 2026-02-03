@@ -18,6 +18,7 @@ resource "proxmox_vm_qemu" "github_runner" {
   }
 
   network {
+    id     = 0
     bridge = "vmbr0"
     model  = "virtio"
   }
