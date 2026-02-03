@@ -4,7 +4,7 @@ resource "proxmox_lxc" "debian" {
 
   hostname = "dev-lxc-${count.index + 1}"
   ostemplate = var.template
-  target_node = var.node
+  target_node = var.pm_node
   password = "password123"  # quick-and-dirty
 
   cores = 2
