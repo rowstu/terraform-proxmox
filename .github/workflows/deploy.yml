@@ -1,0 +1,36 @@
+name: Terraform Proxmox deploy
+on:
+  workflow_dispatch:
+
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init
+        run: terraform init
+        working-directory: infra
+
+      - name: Terraform plan
+        run: terraform plan
+        working-directory: infra
+        env:
+          #TF_VAR_pm_api_url: ${{ secrets.PROXMOX_API_URL }}
+          TF_VAR_pm_api_token_id: ${{ secrets.PROXMOX_TOKEN_ID }}
+          TF_VAR_pm_api_token_secret: ${{ secrets.PROXMOX_TOKEN_SECRET }}
+          TF_VAR_pm_node: pve3
+          TF_VAR_template_vm: 7000
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve
+        working-directory: infra
+        env:
+          #TF_VAR_pm_api_url: ${{ secrets.PROXMOX_API_URL }}
+          TF_VAR_pm_api_token_id: ${{ secrets.PROXMOX_TOKEN_ID }}
+          TF_VAR_pm_api_token_secret: ${{ secrets.PROXMOX_TOKEN_SECRET }}
+          TF_VAR_pm_node: pve3
+          TF_VAR_template_vm: 7000
